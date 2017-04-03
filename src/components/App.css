@@ -1,0 +1,51 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  
+}
+
+.app {
+  text-align: center;
+}
+
+.app-content {
+  max-width: 600px;
+  border: 1px black solid;
+  margin: auto;
+  position: relative;
+}
+
+.app-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+#drawing-area {
+  
+  left: 0px;
+  width: 111px;
+  height: 1000px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+#drawing-area-container {
+  
+  position: absolute;
+  width: 111px;
+  height: 1000px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+#controls-container {
+  margin-left: 111px;
+}
