@@ -103,7 +103,7 @@ class Case extends React.Component {
           dy = -((text.length - 1) / 2) + "em"
 
         return (
-          <tspan key={idx} x={centerPos.x} dy={dy} textAnchor="middle" alignmentBaseline="middle" >{line}</tspan>
+          <tspan key={idx} x={centerPos.x} dy={dy} textAnchor="middle" alignmentBaseline="middle" letterSpacing="2">{line}</tspan>
         );
       }
         

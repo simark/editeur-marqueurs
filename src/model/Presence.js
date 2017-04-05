@@ -1,16 +1,16 @@
 class Presence {
-	contructor () {
+	constructor (fuu) {
 		this.runnerAt = 0
-		this.rbi = null
+		this.rbi = ""
 		this.out = 0
-		this.defensivePlay = null
+		this.defensivePlay = []
 		this.doublePlay = false
-		this.line1Text = null
-		this.line2Text = null
-		this.line3Text = null
-		this.line4Text = null
+		this.line1Text = ""
+		this.line2Text = ""
+		this.line3Text = ""
+		this.line4Text = ""
 		this.visit = false
 	}
 }
 
-export default Presence;
+export default Presence

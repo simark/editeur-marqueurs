@@ -8,13 +8,13 @@ import { PresenceEvents } from '../model/events';
 class App extends Component {
   constructor(props) {
     super(props);
-      
+
     let presence1 = new Presence()
     presence1.runnerAt = 0;
     let presence2 = new Presence()
     presence2.runnerAt = 1;
     presence2.line1Text = "BB";
-    presence2.defensivePlay = ["5 - 4"];
+    presence2.defensivePlay = ["5-4"];
     let presence3 = new Presence()
     presence3.runnerAt = 2;
     presence3.out = 2;
@@ -64,26 +64,26 @@ class App extends Component {
       presenceCourante: -1,
     }
   }
-  
+
   selectionnerCasePresence(presence) {
-    let idx = this.state.presences.findIndex(function(elem, index) {
+    let idx = this.state.presences.findIndex(function (elem, index) {
       return elem === presence;
     });
-  
 
-    this.setState({presenceCourante: idx})
+
+    this.setState({ presenceCourante: idx })
   }
-  
+
   updatePresenceCourante(prop, value) {
     let presences = this.state.presences.slice();
     let idx = this.state.presenceCourante;
-    
+
     presences[idx][prop] = value;
-    
-    this.setState({presences: presences});
+
+    this.setState({ presences: presences });
   }
-  
-  editeurEventListener (name, value) {
+
+  editeurEventListener(name, value) {
     switch (name) {
       case PresenceEvents.VISIT:
         this.updatePresenceCourante('visit', value);
@@ -91,36 +91,60 @@ class App extends Component {
       case PresenceEvents.RUNNER_AT:
         this.updatePresenceCourante('runnerAt', value);
         break;
+      case PresenceEvents.DOUBLE_PLAY:
+        this.updatePresenceCourante('doublePlay', value);
+        break;
+      case PresenceEvents.DEFENSIVE_PLAY:
+        this.updatePresenceCourante('defensivePlay', value);
+        break;
+      case PresenceEvents.BASE_LINE_JUSTIFICATION_1:
+        this.updatePresenceCourante('line1Text', value);
+        break;
+      case PresenceEvents.BASE_LINE_JUSTIFICATION_2:
+        this.updatePresenceCourante('line2Text', value);
+        break;
+      case PresenceEvents.BASE_LINE_JUSTIFICATION_3:
+        this.updatePresenceCourante('line3Text', value);
+        break;
+      case PresenceEvents.BASE_LINE_JUSTIFICATION_4:
+        this.updatePresenceCourante('line4Text', value);
+        break;
+      case PresenceEvents.OUT:
+        this.updatePresenceCourante('out', value);
+        break;
+      case PresenceEvents.RBI:
+        this.updatePresenceCourante('rbi', value);
+        break;
       default:
         console.warn("Unhandled event in editeurEventListener.");
         break;
     }
   }
-    
+
   render() {
     let app = this;
     let dispPresence = function (presence, idx) {
-     
+
       return (
-        <Case origX={2} origY={100 * idx} presence={presence} key={idx} actionSelection={app.selectionnerCasePresence.bind(app)} presenceCourante={idx===app.state.presenceCourante} />
+        <Case origX={2} origY={100 * idx} presence={presence} key={idx} actionSelection={app.selectionnerCasePresence.bind(app)} presenceCourante={idx === app.state.presenceCourante} />
       )
     }
-    
+
     let svgHeight = 100 * this.state.presences.length + 5;
     let svgStyle = { height: svgHeight + 'px' };
-    
+
     return (
       <div className="app">
         <div className="app-content">
-            <div id="drawing-area-container">
-              <svg id="drawing-area" style={svgStyle}>
-                { this.state.presences.map(dispPresence) }
-              </svg>
-            </div>
-            <div id="controls-container">
-              <EditeurPresence presence={this.state.presenceCourante >= 0 ? this.state.presences[this.state.presenceCourante] : null}
-                eventListener={this.editeurEventListener.bind(this)} />
-            </div>
+          <div id="drawing-area-container">
+            <svg id="drawing-area" style={svgStyle}>
+              {this.state.presences.map(dispPresence)}
+            </svg>
+          </div>
+          <div id="controls-container">
+            <EditeurPresence presence={this.state.presenceCourante >= 0 ? this.state.presences[this.state.presenceCourante] : null}
+              eventListener={this.editeurEventListener.bind(this)} />
+          </div>
         </div>
       </div>
     );
