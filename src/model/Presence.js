@@ -1,5 +1,9 @@
 class Presence {
-	constructor (fuu) {
+	constructor() {
+		this.clear()
+	}
+
+	clear() {
 		this.runnerAt = 0
 		this.rbi = ""
 		this.out = 0

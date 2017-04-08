@@ -41,6 +41,10 @@ class EditeurPresence extends React.Component {
     this.fireEvent(eventToFire, val)
   }
 
+  toutEffacer(event) {
+    this.fireEvent(PresenceEvents.CLEAR_ALL);
+  }
+
   renderForm() {
     let defensivePlay = ''
 
@@ -107,6 +111,11 @@ class EditeurPresence extends React.Component {
           <tr>
             <td>Point produit</td>
             <td><input type="text" value={this.props.presence.rbi} onChange={this.simpleValueEmit.bind(this, PresenceEvents.RBI)} /></td>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td><button onClick={this.toutEffacer.bind(this)}>Tout effacer</button></td>
           </tr>
         </tbody>
       </table>

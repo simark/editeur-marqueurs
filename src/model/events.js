@@ -9,4 +9,5 @@ export const PresenceEvents = {
 	BASE_LINE_JUSTIFICATION_4: 'BASE_LINE_JUSTIFICATION_4',
 	OUT: 'OUT',
 	RBI: 'RBI',
+	CLEAR_ALL: 'CLEAR_ALL',
 }

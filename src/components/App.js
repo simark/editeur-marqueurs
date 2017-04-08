@@ -74,6 +74,15 @@ class App extends Component {
     this.setState({ presenceCourante: idx })
   }
 
+  effacerPresenceCourante() {
+    let presences = this.state.presences.slice();
+    let idx = this.state.presenceCourante;
+
+    presences[idx].clear();
+
+    this.setState({ presences: presences });
+  }
+
   updatePresenceCourante(prop, value) {
     let presences = this.state.presences.slice();
     let idx = this.state.presenceCourante;
@@ -114,6 +123,9 @@ class App extends Component {
         break;
       case PresenceEvents.RBI:
         this.updatePresenceCourante('rbi', value);
+        break;
+      case PresenceEvents.CLEAR_ALL:
+        this.effacerPresenceCourante();
         break;
       default:
         console.warn("Unhandled event in editeurEventListener.");
