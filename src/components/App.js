@@ -70,8 +70,12 @@ class App extends Component {
       return elem === presence;
     });
 
+    if (this.state.presenceCourante !== idx) {
+      this.setState({ presenceCourante: idx })
+    } else {
+      this.setState({ presenceCourante: -1 })
+    }
 
-    this.setState({ presenceCourante: idx })
   }
 
   effacerPresenceCourante() {
