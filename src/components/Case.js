@@ -31,21 +31,24 @@ class Case extends React.Component {
         <text x={ position.x } y={ position.y } fill="darkblue" textAnchor="middle" alignmentBaseline="middle" fontSize="25">{ rbiText }</text>
       );
     };
-    
-    var drawOut = function (out, bottomRightPos) {
-      if (!out)
-        return null
-      
+
+    var drawOutCircle = function (bottomRightPos) {
       var computeD = function () {
         var radius = 23
         return "M " + (bottomRightPos.x - radius) + " " + bottomRightPos.y + " A " + radius + " " + radius + " 0 0 1 " + ( bottomRightPos.x ) + " " + (bottomRightPos.y - radius);
       };
 
       return (
-        <g>
-          <text x={ bottomRightPos.x - 3 } y={ bottomRightPos.y - 3 } fill="darkblue" textAnchor="end" alignmentBaseline="baseline" fontSize="17">{ out }</text>
           <path d={ computeD() } fillOpacity="0" stroke="darkblue" strokeWidth="2" />
-        </g>
+      )
+    }
+    
+    var drawOut = function (out, bottomRightPos) {
+      if (!out)
+        return null
+      
+      return (
+          <text x={ bottomRightPos.x - 3 } y={ bottomRightPos.y - 3 } fill="darkblue" textAnchor="end" alignmentBaseline="baseline" fontSize="17">{ out }</text>
       )
     }
     
@@ -222,6 +225,7 @@ class Case extends React.Component {
 
         { drawRbi(this.props.presence.rbi, center) }
         
+        { drawOutCircle(bottomRight) }
         { drawOut(this.props.presence.out, bottomRight) }
         
         { drawLineText(this.props.presence.line1Text, line1TextPos) }
