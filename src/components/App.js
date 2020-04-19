@@ -104,6 +104,9 @@ class App extends Component {
       case PresenceEvents.RUNNER_AT:
         this.updatePresenceCourante('runnerAt', value);
         break;
+      case PresenceEvents.AT_BAT:
+        this.updatePresenceCourante('atBat', value);
+        break
       case PresenceEvents.DOUBLE_PLAY:
         this.updatePresenceCourante('doublePlay', value);
         break;

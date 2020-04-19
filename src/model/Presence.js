@@ -5,6 +5,7 @@ class Presence {
 
 	clear() {
 		this.runnerAt = 0
+                this.atBat = ""
 		this.rbi = ""
 		this.out = 0
 		this.defensivePlay = []

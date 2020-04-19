@@ -32,7 +32,17 @@ class Case extends React.Component {
         </g>
       );
     };
-    
+
+    var drawAtBatCircle = function (value, positions) {
+      console.log(value);
+      if (value === "") {
+        return;
+      }
+      var position = positions[value];
+
+      return <circle cx={ position.x } cy={ position.y } r="7" fillOpacity="0" stroke="darkblue" strokeWidth="2"  />
+    };
+
     var drawBaseLine = function (from, to) {
       return (
         <line x1={ from.x } y1={ from.y } x2={ to.x } y2={ to.y } stroke="darkblue" strokeWidth="2" />
@@ -188,7 +198,7 @@ class Case extends React.Component {
       y: thirdBaseCoord.y,
     };
 
-    let lineTextPosFuzz = 3;
+    let lineTextPosFuzz = 5;
     let lineTextPosLeft = Math.floor((thirdBaseCoord.x + secondBaseCoord.x) / 2) - lineTextPosFuzz;;
     let lineTextPosRight = Math.floor((secondBaseCoord.x + firstBaseCoord.x) / 2) + lineTextPosFuzz;
 
@@ -235,6 +245,41 @@ class Case extends React.Component {
     var notAnAbSACY = this.props.origY + Math.floor(this.props.height * 70 / 100);
     var notAnAbINTY = this.props.origY + Math.floor(this.props.height * 87 / 100);
 
+    var positionsAtBat = {
+      '1': {
+        x: hitNumber1X,
+        y: hitNumberY,
+      },
+      '2': {
+        x: hitNumber2X,
+        y: hitNumberY,
+      },
+      '3': {
+        x: hitNumber3X,
+        y: hitNumberY,
+      },
+      'CC': {
+        x: hitNumberCCX,
+        y: hitNumberY,
+      },
+      'BB': {
+        x: notAnABX,
+        y: notAnAbBBY,
+      },
+      'FA': {
+        x: notAnABX,
+        y: notAnAbFAY,
+      },
+      'SAC': {
+        x: notAnABX,
+        y: notAnAbSACY,
+      },
+      'INT': {
+        x: notAnABX,
+        y: notAnAbINTY,
+      },
+    };
+
     return (
       <g>
         <rect x={ this.props.origX } y={ this.props.origY } width={ this.props.width } height={ this.props.height }
@@ -255,6 +300,8 @@ class Case extends React.Component {
         { drawNotAnAB("SAC", notAnABX, notAnAbSACY) }
         { drawNotAnAB("INT", notAnABX, notAnAbINTY) }
 
+        { drawAtBatCircle(this.props.presence.atBat, positionsAtBat) }
+
         { this.props.presence.runnerAt > 0 && drawBaseLine(homePlateCoord, firstBaseCoord) }
         { this.props.presence.runnerAt > 1 && drawBaseLine(firstBaseCoord, secondBaseCoord) }
         { this.props.presence.runnerAt > 2 && drawBaseLine(secondBaseCoord, thirdBaseCoord) }
@@ -274,7 +321,7 @@ class Case extends React.Component {
 
         { drawDoublePlay(this.props.presence.doublePlay, bottomLeft) }
         { drawVisit(this.props.presence.visit, topRight) }
-        
+
         <rect x={ this.props.origX } y={ this.props.origY } width={ this.props.width } height={ this.props.height }
           fillOpacity="0" onClick={this.selectionner.bind(this)} />
       </g>
