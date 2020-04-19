@@ -16,6 +16,22 @@ class Case extends React.Component {
         <circle cx={ basePos.x } cy={ basePos.y } r="2" fill="darkblue" />
       );
     };
+
+    var drawHitNumber = function (text, x, y) {
+      return (
+        <g>
+          <text x={ x } y={ y } textAnchor="middle" dominantBaseline="middle" fontSize="12">{ text }</text>
+        </g>
+      );
+    };
+
+    var drawNotAnAB = function (text, x, y) {
+      return (
+        <g>
+          <text x={ x } y={ y } textAnchor="start" dominantBaseline="middle" fontSize="12">{ text }</text>
+        </g>
+      );
+    };
     
     var drawBaseLine = function (from, to) {
       return (
@@ -28,7 +44,7 @@ class Case extends React.Component {
         return null;
       
       return (
-        <text x={ position.x } y={ position.y } fill="darkblue" textAnchor="middle" alignmentBaseline="middle" fontSize="25">{ rbiText }</text>
+        <text x={ position.x } y={ position.y } fill="darkblue" textAnchor="middle" dominantBaseline="middle" fontSize="25">{ rbiText }</text>
       );
     };
 
@@ -48,7 +64,7 @@ class Case extends React.Component {
         return null
       
       return (
-          <text x={ bottomRightPos.x - 3 } y={ bottomRightPos.y - 3 } fill="darkblue" textAnchor="end" alignmentBaseline="baseline" fontSize="17">{ out }</text>
+          <text x={ bottomRightPos.x - 3 } y={ bottomRightPos.y - 3 } fill="darkblue" textAnchor="end" dominantBaseline="baseline" fontSize="17">{ out }</text>
       )
     }
     
@@ -80,7 +96,7 @@ class Case extends React.Component {
       }
 
       let boxX = pos.x - bbox.width / 2 - 2
-      let boxY = pos.alignmentBaseline === "hanging" ? pos.y - 4  : pos.y - bbox.height + 3
+      let boxY = pos.dominantBaseline === "hanging" ? pos.y - 4  : pos.y - bbox.height + 3
       let boxW = bbox.width + 4
       let boxH = bbox.height 
       let rad = 10;
@@ -89,7 +105,7 @@ class Case extends React.Component {
       return (
         <g transform={ t }>
           <rect x={boxX} y={boxY} height={boxH} width={boxW} fillOpacity="0" strokeWidth="0" stroke="darkblue" rx={rad} ry={rad} />
-          <text x={pos.x} y={pos.y} fill="darkblue" textAnchor="middle" alignmentBaseline={ pos.alignmentBaseline } fontSize="17">{text}</text>
+          <text x={pos.x} y={pos.y} fill="darkblue" textAnchor="middle" dominantBaseline={ pos.dominantBaseline } fontSize="17">{text}</text>
         </g>
       )
     };
@@ -106,7 +122,7 @@ class Case extends React.Component {
           dy = -((text.length - 1) / 2) + "em"
 
         return (
-          <tspan key={idx} x={centerPos.x} dy={dy} textAnchor="middle" alignmentBaseline="middle" letterSpacing="2">{line}</tspan>
+          <tspan key={idx} x={centerPos.x} dy={dy} textAnchor="middle" dominantBaseline="middle" letterSpacing="2">{line}</tspan>
         );
       }
         
@@ -122,7 +138,7 @@ class Case extends React.Component {
         return null;
         
       return (
-        <text x={bottomLeftPos.x + 3} y={bottomLeftPos.y - 3} fill="darkblue" textAnchor="start" alignmentBaseline="baseline" fontSize="17">DJ</text>
+        <text x={bottomLeftPos.x + 3} y={bottomLeftPos.y - 3} fill="darkblue" textAnchor="start" dominantBaseline="baseline" fontSize="17">DJ</text>
       )
     }
     
@@ -131,83 +147,94 @@ class Case extends React.Component {
         return null;
         
       return (
-        <text x={topRightPos.x - 3} y={topRightPos.y + 3} fill="darkblue" textAnchor="end" alignmentBaseline="hanging" fontSize="17">V</text>
+        <text x={topRightPos.x - 3} y={topRightPos.y + 3} fill="darkblue" textAnchor="end" dominantBaseline="hanging" fontSize="17">V</text>
       )
     }
 
-    var distanceDotsToBorderH = this.props.width / 6.0;
-    var distanceDotsToBorderV = this.props.height / 6.0;
-
-    var center = {
-      x: this.props.origX + this.props.width / 2,
-      y: this.props.origY + this.props.height / 2,
-    };
-    
     var bottomRight = {
       x: this.props.origX + this.props.width,
       y: this.props.origY + this.props.height,
     };
-    
+
     var bottomLeft = {
       x: this.props.origX,
       y: this.props.origY + this.props.height,
     };
-    
+
     var topRight = {
       x: this.props.origX + this.props.width,
       y: this.props.origY,
     };
-    
+
     var homePlateCoord = {
-      x: center.x,
-      y: this.props.origY + this.props.height - distanceDotsToBorderV,
+      x: this.props.origX + Math.floor(this.props.width * 72 / 133),
+      y: this.props.origY + Math.floor(this.props.height * 84 / 100),
     };
     var firstBaseCoord = {
-      x: this.props.origX + this.props.width - distanceDotsToBorderH,
-      y: center.y,
+      x: this.props.origX + Math.floor(this.props.width * 103 / 133),
+      y: this.props.origY + Math.floor(this.props.height * 54 / 100),
     };
     var secondBaseCoord = {
-      x: center.x,
-      y: this.props.origY + distanceDotsToBorderV,
+      x: this.props.origX + Math.floor(this.props.width * 72 / 133),
+      y: this.props.origY + Math.floor(this.props.height * 24 / 100),
     };
     var thirdBaseCoord = {
-      x: this.props.origX + distanceDotsToBorderH,
-      y: center.y,
+      x: this.props.origX + Math.floor(this.props.width * 43 / 133),
+      y: this.props.origY + Math.floor(this.props.height * 54 / 100),
     };
-    
-    let lineTextPosLeft = this.props.origX + this.props.width / 3.0 - 3;
-    let lineTextPosRight = this.props.origX + 2 * this.props.width / 3.0 + 3;
-    let lineTextPosTop = this.props.origY + this.props.height / 3.0 - 3;
-    let lineTextPosBottom = this.props.origY + 2 * this.props.height / 3.0 + 3;
+
+    var fieldCenter = {
+      x: secondBaseCoord.x,
+      y: thirdBaseCoord.y,
+    };
+
+    let lineTextPosFuzz = 3;
+    let lineTextPosLeft = Math.floor((thirdBaseCoord.x + secondBaseCoord.x) / 2) - lineTextPosFuzz;;
+    let lineTextPosRight = Math.floor((secondBaseCoord.x + firstBaseCoord.x) / 2) + lineTextPosFuzz;
+
+    let lineTextPosTop = Math.floor((secondBaseCoord.y + thirdBaseCoord.y) / 2) - lineTextPosFuzz;
+    let lineTextPosBottom = Math.floor((thirdBaseCoord.y + homePlateCoord.y) / 2) + lineTextPosFuzz;
     
     var line1TextPos = {
       x: lineTextPosRight,
       y: lineTextPosBottom,
-      alignmentBaseline: "hanging",
+      dominantBaseline: "hanging",
       rotation: -45,
     };
     
     var line2TextPos = {
       x: lineTextPosRight,
       y: lineTextPosTop,
-      alignmentBaseline: "baseline",
+      dominantBaseline: "baseline",
       rotation: 45,
     };
     
     var line3TextPos = {
       x: lineTextPosLeft,
       y: lineTextPosTop,
-      alignmentBaseline: "baseline",
+      dominantBaseline: "baseline",
       rotation: -45,
     };
     
     var line4TextPos = {
       x: lineTextPosLeft,
       y: lineTextPosBottom,
-      alignmentBaseline: "hanging",
+      dominantBaseline: "hanging",
       rotation: 45,
     };
-    
+
+    var hitNumberY = this.props.origY + Math.floor(this.props.height * 13 / 100);
+    var hitNumber1X = this.props.origX + Math.floor(this.props.width * 35 / 133);
+    var hitNumber2X = this.props.origX + Math.floor(this.props.width * 55 / 133);
+    var hitNumber3X = this.props.origX + Math.floor(this.props.width * 73 / 133);
+    var hitNumberCCX = this.props.origX + Math.floor(this.props.width * 96 / 133);
+
+    var notAnABX = this.props.origX + Math.floor(this.props.width * 4 / 133);
+    var notAnAbBBY = this.props.origY + Math.floor(this.props.height * 35 / 100);
+    var notAnAbFAY = this.props.origY + Math.floor(this.props.height * 53 / 100);
+    var notAnAbSACY = this.props.origY + Math.floor(this.props.height * 70 / 100);
+    var notAnAbINTY = this.props.origY + Math.floor(this.props.height * 87 / 100);
+
     return (
       <g>
         <rect x={ this.props.origX } y={ this.props.origY } width={ this.props.width } height={ this.props.height }
@@ -217,13 +244,23 @@ class Case extends React.Component {
         { drawBase(firstBaseCoord) }
         { drawBase(secondBaseCoord) }
         { drawBase(thirdBaseCoord) }
-        
+
+        { drawHitNumber("1", hitNumber1X, hitNumberY) }
+        { drawHitNumber("2", hitNumber2X, hitNumberY) }
+        { drawHitNumber("3", hitNumber3X, hitNumberY) }
+        { drawHitNumber("CC", hitNumberCCX, hitNumberY) }
+
+        { drawNotAnAB("BB", notAnABX, notAnAbBBY) }
+        { drawNotAnAB("FA", notAnABX, notAnAbFAY) }
+        { drawNotAnAB("SAC", notAnABX, notAnAbSACY) }
+        { drawNotAnAB("INT", notAnABX, notAnAbINTY) }
+
         { this.props.presence.runnerAt > 0 && drawBaseLine(homePlateCoord, firstBaseCoord) }
         { this.props.presence.runnerAt > 1 && drawBaseLine(firstBaseCoord, secondBaseCoord) }
         { this.props.presence.runnerAt > 2 && drawBaseLine(secondBaseCoord, thirdBaseCoord) }
         { this.props.presence.runnerAt > 3 && drawBaseLine(thirdBaseCoord, homePlateCoord) }
 
-        { drawRbi(this.props.presence.rbi, center) }
+        { drawRbi(this.props.presence.rbi, fieldCenter) }
         
         { drawOutCircle(bottomRight) }
         { drawOut(this.props.presence.out, bottomRight) }
@@ -233,7 +270,7 @@ class Case extends React.Component {
         { drawLineText(this.props.presence.line3Text, line3TextPos) }
         { drawLineText(this.props.presence.line4Text, line4TextPos) }
 
-        { drawDefensivePlay(this.props.presence.defensivePlay, center) }
+        { drawDefensivePlay(this.props.presence.defensivePlay, fieldCenter) }
 
         { drawDoublePlay(this.props.presence.doublePlay, bottomLeft) }
         { drawVisit(this.props.presence.visit, topRight) }
@@ -248,7 +285,7 @@ class Case extends React.Component {
 Case.defaultProps = {
   origX: 0,
   origY: 0,
-  width: 100,
+  width: 133,
   height: 100,
 };
 
