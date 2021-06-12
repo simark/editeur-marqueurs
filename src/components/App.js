@@ -143,6 +143,16 @@ class App extends Component {
     }
   }
 
+  effacerToutesLesCases(event) {
+    let presences = this.state.presences.slice();
+
+    for (const p of presences) {
+      p.clear();
+    }
+
+    this.setState({ presences: presences });
+  }
+
   render() {
     let app = this;
     let dispPresence = function (presence, idx) {
@@ -160,6 +170,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="app-content">
+          <button onClick={this.effacerToutesLesCases.bind(this)}>Effacer toutes les cases</button>
           <div id="drawing-area-container">
             <svg id="drawing-area" style={svgStyle}>
               {this.state.presences.map(dispPresence)}
