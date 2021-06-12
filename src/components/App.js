@@ -134,6 +134,9 @@ class App extends Component {
       case PresenceEvents.CLEAR_ALL:
         this.effacerPresenceCourante();
         break;
+      case PresenceEvents.JERSEY_NUMBER:
+        this.updatePresenceCourante('jerseyNumber', value)
+        break;
       default:
         console.warn("Unhandled event in editeurEventListener.");
         break;
@@ -145,7 +148,9 @@ class App extends Component {
     let dispPresence = function (presence, idx) {
 
       return (
-        <Case origX={2} origY={100 * idx} presence={presence} key={idx} actionSelection={app.selectionnerCasePresence.bind(app)} presenceCourante={idx === app.state.presenceCourante} />
+        <Case origX={2} origY={100 * idx} presence={presence} key={idx}
+          actionSelection={app.selectionnerCasePresence.bind(app)}
+          presenceCourante={idx === app.state.presenceCourante} />
       )
     }
 

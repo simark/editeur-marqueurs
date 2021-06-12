@@ -57,6 +57,13 @@ class EditeurPresence extends React.Component {
     return (
       <table>
         <tbody>
+          <tr>
+            <td>Numéro joueur:</td>
+            <td>
+              <input type="text" value={this.props.presence.jerseyNumber}
+                onChange={this.simpleValueEmit.bind(this, PresenceEvents.JERSEY_NUMBER)} />
+            </td>
+          </tr>
 
           <tr>
             <td>Frappeur/coureur est au:</td>

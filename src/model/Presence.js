@@ -15,6 +15,7 @@ class Presence {
 		this.line3Text = ""
 		this.line4Text = ""
 		this.visit = false
+		this.jerseyNumber = ""
 	}
 }
 

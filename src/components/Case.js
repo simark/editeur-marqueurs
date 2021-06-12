@@ -161,36 +161,47 @@ class Case extends React.Component {
       )
     }
 
+    var caseOffsetX = 40;
+    var left = this.props.origX + caseOffsetX;
+    var right = left + this.props.width;
+    var top = this.props.origY;
+    var bottom = top + this.props.height;
+
+    var topLeft = {
+      x: left,
+      y: top,
+    };
+
     var bottomRight = {
-      x: this.props.origX + this.props.width,
-      y: this.props.origY + this.props.height,
+      x: right,
+      y: bottom,
     };
 
     var bottomLeft = {
-      x: this.props.origX,
-      y: this.props.origY + this.props.height,
+      x: left,
+      y: bottom,
     };
 
     var topRight = {
-      x: this.props.origX + this.props.width,
-      y: this.props.origY,
+      x: right,
+      y: top,
     };
 
     var homePlateCoord = {
-      x: this.props.origX + Math.floor(this.props.width * 72 / 133),
-      y: this.props.origY + Math.floor(this.props.height * 84 / 100),
+      x: left + Math.floor(this.props.width * 72 / 133),
+      y: top + Math.floor(this.props.height * 84 / 100),
     };
     var firstBaseCoord = {
-      x: this.props.origX + Math.floor(this.props.width * 103 / 133),
-      y: this.props.origY + Math.floor(this.props.height * 54 / 100),
+      x: left + Math.floor(this.props.width * 103 / 133),
+      y: top + Math.floor(this.props.height * 54 / 100),
     };
     var secondBaseCoord = {
-      x: this.props.origX + Math.floor(this.props.width * 72 / 133),
-      y: this.props.origY + Math.floor(this.props.height * 24 / 100),
+      x: left + Math.floor(this.props.width * 72 / 133),
+      y: top + Math.floor(this.props.height * 24 / 100),
     };
     var thirdBaseCoord = {
-      x: this.props.origX + Math.floor(this.props.width * 43 / 133),
-      y: this.props.origY + Math.floor(this.props.height * 54 / 100),
+      x: left + Math.floor(this.props.width * 43 / 133),
+      y: top + Math.floor(this.props.height * 54 / 100),
     };
 
     var fieldCenter = {
@@ -233,17 +244,17 @@ class Case extends React.Component {
       rotation: 45,
     };
 
-    var hitNumberY = this.props.origY + Math.floor(this.props.height * 13 / 100);
-    var hitNumber1X = this.props.origX + Math.floor(this.props.width * 35 / 133);
-    var hitNumber2X = this.props.origX + Math.floor(this.props.width * 55 / 133);
-    var hitNumber3X = this.props.origX + Math.floor(this.props.width * 73 / 133);
-    var hitNumberCCX = this.props.origX + Math.floor(this.props.width * 96 / 133);
+    var hitNumberY = top + Math.floor(this.props.height * 13 / 100);
+    var hitNumber1X = left + Math.floor(this.props.width * 35 / 133);
+    var hitNumber2X = left + Math.floor(this.props.width * 55 / 133);
+    var hitNumber3X = left + Math.floor(this.props.width * 73 / 133);
+    var hitNumberCCX = left + Math.floor(this.props.width * 96 / 133);
 
-    var notAnABX = this.props.origX + Math.floor(this.props.width * 4 / 133);
-    var notAnAbBBY = this.props.origY + Math.floor(this.props.height * 35 / 100);
-    var notAnAbFAY = this.props.origY + Math.floor(this.props.height * 53 / 100);
-    var notAnAbSACY = this.props.origY + Math.floor(this.props.height * 70 / 100);
-    var notAnAbINTY = this.props.origY + Math.floor(this.props.height * 87 / 100);
+    var notAnABX = left + Math.floor(this.props.width * 4 / 133);
+    var notAnAbBBY = top + Math.floor(this.props.height * 35 / 100);
+    var notAnAbFAY = top + Math.floor(this.props.height * 53 / 100);
+    var notAnAbSACY = top + Math.floor(this.props.height * 70 / 100);
+    var notAnAbINTY = top + Math.floor(this.props.height * 87 / 100);
 
     var positionsAtBat = {
       '1': {
@@ -282,7 +293,7 @@ class Case extends React.Component {
 
     return (
       <g>
-        <rect x={ this.props.origX } y={ this.props.origY } width={ this.props.width } height={ this.props.height }
+        <rect x={ left } y={ top } width={ this.props.width } height={ this.props.height }
           style={{ fill: this.props.presenceCourante ? "white" : "lightgrey", stroke: "darkblue", strokeWidth: 2 }} />
 
         { drawBase(homePlateCoord) }
@@ -322,8 +333,12 @@ class Case extends React.Component {
         { drawDoublePlay(this.props.presence.doublePlay, bottomLeft) }
         { drawVisit(this.props.presence.visit, topRight) }
 
-        <rect x={ this.props.origX } y={ this.props.origY } width={ this.props.width } height={ this.props.height }
+        <rect x={ left } y={ top } width={ this.props.width } height={ this.props.height }
           fillOpacity="0" onClick={this.selectionner.bind(this)} />
+
+        <text x={ this.props.origX + 20 } y={ this.props.origY + 50 } fill="darkblue" textAnchor="middle" dominantBaseline="middle" fontSize="25">
+          {this.props.presence.jerseyNumber}
+        </text>
       </g>
     );
   }
@@ -332,7 +347,7 @@ class Case extends React.Component {
 Case.defaultProps = {
   origX: 0,
   origY: 0,
-  width: 133,
+  width: 30 + 133,
   height: 100,
 };
 

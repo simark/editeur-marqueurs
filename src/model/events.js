@@ -11,4 +11,5 @@ export const PresenceEvents = {
 	OUT: 'OUT',
 	RBI: 'RBI',
 	CLEAR_ALL: 'CLEAR_ALL',
+	JERSEY_NUMBER: 'JERSEY_NUMBER',
 }

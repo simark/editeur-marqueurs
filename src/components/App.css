@@ -29,7 +29,7 @@ body {
 #drawing-area {
 
   left: 0px;
-  width: 140px;
+  width: 220px;
   height: 1000px;
   margin: 0px;
   padding: 0px;
@@ -39,7 +39,7 @@ body {
 #drawing-area-container {
 
   position: absolute;
-  width: 140px;
+  width: 220px;
   height: 1000px;
   margin: 0px;
   padding: 0px;
@@ -47,5 +47,5 @@ body {
 }
 
 #controls-container {
-  margin-left: 111px;
+  margin-left: 220px;
 }
