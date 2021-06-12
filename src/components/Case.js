@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Case extends React.Component {
 
-  selectionner (e) {
+  selectionner(e) {
     if (this.props.actionSelection) {
       this.props.actionSelection(this.props.presence);
     }
@@ -14,14 +14,14 @@ class Case extends React.Component {
 
     var drawBase = function (basePos) {
       return (
-        <circle cx={ basePos.x } cy={ basePos.y } r="2" fill="darkblue" />
+        <circle cx={basePos.x} cy={basePos.y} r="2" fill="darkblue" />
       );
     };
 
     var drawHitNumber = function (text, x, y) {
       return (
         <g>
-          <text x={ x } y={ y } textAnchor="middle" dominantBaseline="middle" fontSize="12">{ text }</text>
+          <text x={x} y={y} textAnchor="middle" dominantBaseline="middle" fontSize="12">{text}</text>
         </g>
       );
     };
@@ -29,7 +29,7 @@ class Case extends React.Component {
     var drawNotAnAB = function (text, x, y) {
       return (
         <g>
-          <text x={ x } y={ y } textAnchor="start" dominantBaseline="middle" fontSize="12">{ text }</text>
+          <text x={x} y={y} textAnchor="start" dominantBaseline="middle" fontSize="12">{text}</text>
         </g>
       );
     };
@@ -41,12 +41,12 @@ class Case extends React.Component {
       }
       var position = positions[value];
 
-      return <circle cx={ position.x } cy={ position.y } r="7" fillOpacity="0" stroke="darkblue" strokeWidth="2"  />
+      return <circle cx={position.x} cy={position.y} r="7" fillOpacity="0" stroke="darkblue" strokeWidth="2" />
     };
 
     var drawBaseLine = function (from, to) {
       return (
-        <line x1={ from.x } y1={ from.y } x2={ to.x } y2={ to.y } stroke="darkblue" strokeWidth="2" />
+        <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="darkblue" strokeWidth="2" />
       );
     };
 
@@ -55,18 +55,18 @@ class Case extends React.Component {
         return null;
 
       return (
-        <text x={ position.x } y={ position.y } fill="darkblue" textAnchor="middle" dominantBaseline="middle" fontSize="25">{ rbiText }</text>
+        <text x={position.x} y={position.y} fill="darkblue" textAnchor="middle" dominantBaseline="middle" fontSize="25">{rbiText}</text>
       );
     };
 
     var drawOutCircle = function (bottomRightPos) {
       var computeD = function () {
         var radius = 23
-        return "M " + (bottomRightPos.x - radius) + " " + bottomRightPos.y + " A " + radius + " " + radius + " 0 0 1 " + ( bottomRightPos.x ) + " " + (bottomRightPos.y - radius);
+        return "M " + (bottomRightPos.x - radius) + " " + bottomRightPos.y + " A " + radius + " " + radius + " 0 0 1 " + (bottomRightPos.x) + " " + (bottomRightPos.y - radius);
       };
 
       return (
-          <path d={ computeD() } fillOpacity="0" stroke="darkblue" strokeWidth="2" />
+        <path d={computeD()} fillOpacity="0" stroke="darkblue" strokeWidth="2" />
       )
     }
 
@@ -75,7 +75,7 @@ class Case extends React.Component {
         return null
 
       return (
-          <text x={ bottomRightPos.x - 3 } y={ bottomRightPos.y - 3 } fill="darkblue" textAnchor="end" dominantBaseline="baseline" fontSize="17">{ out }</text>
+        <text x={bottomRightPos.x - 3} y={bottomRightPos.y - 3} fill="darkblue" textAnchor="end" dominantBaseline="baseline" fontSize="17">{out}</text>
       )
     }
 
@@ -107,16 +107,16 @@ class Case extends React.Component {
       }
 
       let boxX = pos.x - bbox.width / 2 - 2
-      let boxY = pos.dominantBaseline === "hanging" ? pos.y - 4  : pos.y - bbox.height + 3
+      let boxY = pos.dominantBaseline === "hanging" ? pos.y - 4 : pos.y - bbox.height + 3
       let boxW = bbox.width + 4
       let boxH = bbox.height
       let rad = 10;
 
       let t = "rotate(" + pos.rotation + ", " + pos.x + ", " + pos.y + ")";
       return (
-        <g transform={ t }>
+        <g transform={t}>
           <rect x={boxX} y={boxY} height={boxH} width={boxW} fillOpacity="0" strokeWidth="0" stroke="darkblue" rx={rad} ry={rad} />
-          <text x={pos.x} y={pos.y} fill="darkblue" textAnchor="middle" dominantBaseline={ pos.dominantBaseline } fontSize="17">{text}</text>
+          <text x={pos.x} y={pos.y} fill="darkblue" textAnchor="middle" dominantBaseline={pos.dominantBaseline} fontSize="17">{text}</text>
         </g>
       )
     };
@@ -138,7 +138,7 @@ class Case extends React.Component {
       }
 
       return (
-        <text  x={centerPos.x} y={centerPos.y} fill="darkblue" fontSize="17">
+        <text x={centerPos.x} y={centerPos.y} fill="darkblue" fontSize="17">
           {text.map(drawOneLine)}
         </text>
       )
@@ -294,50 +294,50 @@ class Case extends React.Component {
 
     return (
       <g>
-        <rect x={ left } y={ top } width={ this.props.width } height={ this.props.height }
+        <rect x={left} y={top} width={this.props.width} height={this.props.height}
           style={{ fill: this.props.presenceCourante ? "white" : "lightgrey", stroke: "darkblue", strokeWidth: 2 }} />
 
-        { drawBase(homePlateCoord) }
-        { drawBase(firstBaseCoord) }
-        { drawBase(secondBaseCoord) }
-        { drawBase(thirdBaseCoord) }
+        { drawBase(homePlateCoord)}
+        { drawBase(firstBaseCoord)}
+        { drawBase(secondBaseCoord)}
+        { drawBase(thirdBaseCoord)}
 
-        { drawHitNumber("1", hitNumber1X, hitNumberY) }
-        { drawHitNumber("2", hitNumber2X, hitNumberY) }
-        { drawHitNumber("3", hitNumber3X, hitNumberY) }
-        { drawHitNumber("CC", hitNumberCCX, hitNumberY) }
+        { drawHitNumber("1", hitNumber1X, hitNumberY)}
+        { drawHitNumber("2", hitNumber2X, hitNumberY)}
+        { drawHitNumber("3", hitNumber3X, hitNumberY)}
+        { drawHitNumber("CC", hitNumberCCX, hitNumberY)}
 
-        { drawNotAnAB("BB", notAnABX, notAnAbBBY) }
-        { drawNotAnAB("FA", notAnABX, notAnAbFAY) }
-        { drawNotAnAB("SAC", notAnABX, notAnAbSACY) }
-        { drawNotAnAB("INT", notAnABX, notAnAbINTY) }
+        { drawNotAnAB("BB", notAnABX, notAnAbBBY)}
+        { drawNotAnAB("FA", notAnABX, notAnAbFAY)}
+        { drawNotAnAB("SAC", notAnABX, notAnAbSACY)}
+        { drawNotAnAB("INT", notAnABX, notAnAbINTY)}
 
-        { drawAtBatCircle(this.props.presence.atBat, positionsAtBat) }
+        { drawAtBatCircle(this.props.presence.atBat, positionsAtBat)}
 
-        { this.props.presence.runnerAt > 0 && drawBaseLine(homePlateCoord, firstBaseCoord) }
-        { this.props.presence.runnerAt > 1 && drawBaseLine(firstBaseCoord, secondBaseCoord) }
-        { this.props.presence.runnerAt > 2 && drawBaseLine(secondBaseCoord, thirdBaseCoord) }
-        { this.props.presence.runnerAt > 3 && drawBaseLine(thirdBaseCoord, homePlateCoord) }
+        { this.props.presence.runnerAt > 0 && drawBaseLine(homePlateCoord, firstBaseCoord)}
+        { this.props.presence.runnerAt > 1 && drawBaseLine(firstBaseCoord, secondBaseCoord)}
+        { this.props.presence.runnerAt > 2 && drawBaseLine(secondBaseCoord, thirdBaseCoord)}
+        { this.props.presence.runnerAt > 3 && drawBaseLine(thirdBaseCoord, homePlateCoord)}
 
-        { drawRbi(this.props.presence.rbi, fieldCenter) }
+        { drawRbi(this.props.presence.rbi, fieldCenter)}
 
-        { drawOutCircle(bottomRight) }
-        { drawOut(this.props.presence.out, bottomRight) }
+        { drawOutCircle(bottomRight)}
+        { drawOut(this.props.presence.out, bottomRight)}
 
-        { drawLineText(this.props.presence.line1Text, line1TextPos) }
-        { drawLineText(this.props.presence.line2Text, line2TextPos) }
-        { drawLineText(this.props.presence.line3Text, line3TextPos) }
-        { drawLineText(this.props.presence.line4Text, line4TextPos) }
+        { drawLineText(this.props.presence.line1Text, line1TextPos)}
+        { drawLineText(this.props.presence.line2Text, line2TextPos)}
+        { drawLineText(this.props.presence.line3Text, line3TextPos)}
+        { drawLineText(this.props.presence.line4Text, line4TextPos)}
 
-        { drawDefensivePlay(this.props.presence.defensivePlay, fieldCenter) }
+        { drawDefensivePlay(this.props.presence.defensivePlay, fieldCenter)}
 
-        { drawDoublePlay(this.props.presence.doublePlay, bottomLeft) }
-        { drawVisit(this.props.presence.visit, topRight) }
+        { drawDoublePlay(this.props.presence.doublePlay, bottomLeft)}
+        { drawVisit(this.props.presence.visit, topRight)}
 
-        <rect x={ left } y={ top } width={ this.props.width } height={ this.props.height }
+        <rect x={left} y={top} width={this.props.width} height={this.props.height}
           fillOpacity="0" onClick={this.selectionner.bind(this)} />
 
-        <text x={ this.props.origX + 20 } y={ this.props.origY + 50 } fill="darkblue" textAnchor="middle" dominantBaseline="middle" fontSize="25">
+        <text x={this.props.origX + 20} y={this.props.origY + 50} fill="darkblue" textAnchor="middle" dominantBaseline="middle" fontSize="25">
           {this.props.presence.jerseyNumber}
         </text>
       </g>
