@@ -5,7 +5,7 @@
 }
 
 body {
-  
+
 }
 
 .app {
@@ -27,7 +27,7 @@ body {
 }
 
 #drawing-area {
-  
+
   left: 0px;
   width: 140px;
   height: 1000px;
@@ -37,7 +37,7 @@ body {
 }
 
 #drawing-area-container {
-  
+
   position: absolute;
   width: 140px;
   height: 1000px;

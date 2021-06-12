@@ -2,15 +2,15 @@ import React from 'react';
 import Presence from '../model/Presence';
 
 class Case extends React.Component {
-  
+
   selectionner (e) {
     if (this.props.actionSelection) {
       this.props.actionSelection(this.props.presence);
     }
   }
-  
+
   render() {
-    
+
     var drawBase = function (basePos) {
       return (
         <circle cx={ basePos.x } cy={ basePos.y } r="2" fill="darkblue" />
@@ -48,11 +48,11 @@ class Case extends React.Component {
         <line x1={ from.x } y1={ from.y } x2={ to.x } y2={ to.y } stroke="darkblue" strokeWidth="2" />
       );
     };
-    
+
     var drawRbi = function (rbiText, position) {
       if (!rbiText)
         return null;
-      
+
       return (
         <text x={ position.x } y={ position.y } fill="darkblue" textAnchor="middle" dominantBaseline="middle" fontSize="25">{ rbiText }</text>
       );
@@ -68,26 +68,26 @@ class Case extends React.Component {
           <path d={ computeD() } fillOpacity="0" stroke="darkblue" strokeWidth="2" />
       )
     }
-    
+
     var drawOut = function (out, bottomRightPos) {
       if (!out)
         return null
-      
+
       return (
           <text x={ bottomRightPos.x - 3 } y={ bottomRightPos.y - 3 } fill="darkblue" textAnchor="end" dominantBaseline="baseline" fontSize="17">{ out }</text>
       )
     }
-    
+
     var drawLineText = function (text, pos) {
       if (!text)
         return null;
-        
+
       let svgTest = document.getElementById('testing');
-           
+
       while (svgTest.hasChildNodes()) {
         svgTest.removeChild(svgTest.lastChild);
       }
-      
+
       let testText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       testText.setAttribute('x', 20);
       testText.setAttribute('y', 40);
@@ -96,11 +96,11 @@ class Case extends React.Component {
       testText.setAttribute('font-family', "sans-serif");
 
       testText.textContent = text;
-      
+
       svgTest.appendChild(testText);
-      
+
       let bbox = testText.getBoundingClientRect();
-      
+
       while (svgTest.hasChildNodes()) {
         svgTest.removeChild(svgTest.lastChild);
       }
@@ -108,7 +108,7 @@ class Case extends React.Component {
       let boxX = pos.x - bbox.width / 2 - 2
       let boxY = pos.dominantBaseline === "hanging" ? pos.y - 4  : pos.y - bbox.height + 3
       let boxW = bbox.width + 4
-      let boxH = bbox.height 
+      let boxH = bbox.height
       let rad = 10;
 
       let t = "rotate(" + pos.rotation + ", " + pos.x + ", " + pos.y + ")";
@@ -119,11 +119,11 @@ class Case extends React.Component {
         </g>
       )
     };
-    
+
     var drawDefensivePlay = function (text, centerPos) {
       if (!text)
         return null
-        
+
       var drawOneLine = function (line, idx) {
         var dy = "1em";
 
@@ -135,27 +135,27 @@ class Case extends React.Component {
           <tspan key={idx} x={centerPos.x} dy={dy} textAnchor="middle" dominantBaseline="middle" letterSpacing="2">{line}</tspan>
         );
       }
-        
+
       return (
         <text  x={centerPos.x} y={centerPos.y} fill="darkblue" fontSize="17">
           {text.map(drawOneLine)}
         </text>
       )
     }
-    
+
     var drawDoublePlay = function (hasDoublePlay, bottomLeftPos) {
       if (!hasDoublePlay)
         return null;
-        
+
       return (
         <text x={bottomLeftPos.x + 3} y={bottomLeftPos.y - 3} fill="darkblue" textAnchor="start" dominantBaseline="baseline" fontSize="17">DJ</text>
       )
     }
-    
+
     var drawVisit = function (hasVisit, topRightPos) {
       if (!hasVisit)
         return null;
-        
+
       return (
         <text x={topRightPos.x - 3} y={topRightPos.y + 3} fill="darkblue" textAnchor="end" dominantBaseline="hanging" fontSize="17">V</text>
       )
@@ -204,28 +204,28 @@ class Case extends React.Component {
 
     let lineTextPosTop = Math.floor((secondBaseCoord.y + thirdBaseCoord.y) / 2) - lineTextPosFuzz;
     let lineTextPosBottom = Math.floor((thirdBaseCoord.y + homePlateCoord.y) / 2) + lineTextPosFuzz;
-    
+
     var line1TextPos = {
       x: lineTextPosRight,
       y: lineTextPosBottom,
       dominantBaseline: "hanging",
       rotation: -45,
     };
-    
+
     var line2TextPos = {
       x: lineTextPosRight,
       y: lineTextPosTop,
       dominantBaseline: "baseline",
       rotation: 45,
     };
-    
+
     var line3TextPos = {
       x: lineTextPosLeft,
       y: lineTextPosTop,
       dominantBaseline: "baseline",
       rotation: -45,
     };
-    
+
     var line4TextPos = {
       x: lineTextPosLeft,
       y: lineTextPosBottom,
@@ -308,10 +308,10 @@ class Case extends React.Component {
         { this.props.presence.runnerAt > 3 && drawBaseLine(thirdBaseCoord, homePlateCoord) }
 
         { drawRbi(this.props.presence.rbi, fieldCenter) }
-        
+
         { drawOutCircle(bottomRight) }
         { drawOut(this.props.presence.out, bottomRight) }
-        
+
         { drawLineText(this.props.presence.line1Text, line1TextPos) }
         { drawLineText(this.props.presence.line2Text, line2TextPos) }
         { drawLineText(this.props.presence.line3Text, line3TextPos) }
@@ -341,11 +341,11 @@ Case.propTypes = {
   origY: React.PropTypes.number,
   width: React.PropTypes.number,
   height: React.PropTypes.number,
-  
+
   presence: React.PropTypes.instanceOf(Presence).isRequired,
-  
+
   actionSelection: React.PropTypes.func,
-  
+
   presenceCourante: React.PropTypes.bool,
 };
 
