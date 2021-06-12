@@ -1,5 +1,6 @@
 import React from 'react';
 import Presence from '../model/Presence';
+import PropTypes from 'prop-types';
 
 class Case extends React.Component {
 
@@ -352,16 +353,16 @@ Case.defaultProps = {
 };
 
 Case.propTypes = {
-  origX: React.PropTypes.number,
-  origY: React.PropTypes.number,
-  width: React.PropTypes.number,
-  height: React.PropTypes.number,
+  origX: PropTypes.number,
+  origY: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
 
-  presence: React.PropTypes.instanceOf(Presence).isRequired,
+  presence: PropTypes.instanceOf(Presence).isRequired,
 
-  actionSelection: React.PropTypes.func,
+  actionSelection: PropTypes.func,
 
-  presenceCourante: React.PropTypes.bool,
+  presenceCourante: PropTypes.bool,
 };
 
 export default Case;

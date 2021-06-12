@@ -1,6 +1,7 @@
 import React from 'react';
 import Presence from '../model/Presence';
 import { PresenceEvents } from '../model/events';
+import PropTypes from 'prop-types';
 
 class EditeurPresence extends React.Component {
 
@@ -151,8 +152,8 @@ class EditeurPresence extends React.Component {
 }
 
 EditeurPresence.propTypes = {
-  presence: React.PropTypes.instanceOf(Presence),
-  eventListener: React.PropTypes.func,
+  presence: PropTypes.instanceOf(Presence),
+  eventListener: PropTypes.func,
 };
 
 export default EditeurPresence;
