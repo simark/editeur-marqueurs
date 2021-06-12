@@ -85,6 +85,9 @@ class EditeurPresence extends React.Component {
               <div style={divStyle} >
                 <input type="radio" value="" name="atBatRadio" checked={this.props.presence.atBat === ""} onChange={this.simpleValueEmit.bind(this, PresenceEvents.AT_BAT)} />Aucun<br />
                 <input type="radio" value="1" name="atBatRadio" checked={this.props.presence.atBat === "1"} onChange={this.simpleValueEmit.bind(this, PresenceEvents.AT_BAT)} />1<br />
+                <input type="radio" value="2" name="atBatRadio" checked={this.props.presence.atBat === "2"} onChange={this.simpleValueEmit.bind(this, PresenceEvents.AT_BAT)} />2<br />
+                <input type="radio" value="3" name="atBatRadio" checked={this.props.presence.atBat === "3"} onChange={this.simpleValueEmit.bind(this, PresenceEvents.AT_BAT)} />3<br />
+                <input type="radio" value="CC" name="atBatRadio" checked={this.props.presence.atBat === "CC"} onChange={this.simpleValueEmit.bind(this, PresenceEvents.AT_BAT)} />CC<br />
               </div>
             </td>
           </tr>
